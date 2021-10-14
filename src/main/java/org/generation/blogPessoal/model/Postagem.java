@@ -1,7 +1,6 @@
 package org.generation.blogPessoal.model;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +14,16 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Classe espelho da tabela postagem no banco db_blogpessoal.
+ * 
+ * @author Raniel Mendes
+ * @since 1.0
+ */
+
 @Entity
 @Table(name = "postagem")
+
 public class Postagem {
 
 	@Id
@@ -33,18 +40,10 @@ public class Postagem {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date = new java.sql.Date(System.currentTimeMillis());
-	
+
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
-	private Tema tema; 
-
-	public Tema getTema() {
-		return tema;
-	}
-
-	public void setTema(Tema tema) {
-		this.tema = tema;
-	}
+	private Tema tema;
 
 	public long getId() {
 		return id;
@@ -76,6 +75,14 @@ public class Postagem {
 
 	public void setDate(Date date) {
 		this.date = date;
-	};
+	}
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
 
 }
