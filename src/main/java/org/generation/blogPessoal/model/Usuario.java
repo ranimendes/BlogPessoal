@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -19,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "tb_usuario")
+
 public class Usuario {
 
 	@Id
@@ -30,7 +30,6 @@ public class Usuario {
 	private String nome;
 
 	@NotNull(message = "O atributo usuário é obrigatório")
-	@NotBlank(message = "O atributo usuário não pode ser vazio")
 	@Email(message = "O atributo usuário deve ser um email")
 	private String usuario;
 
@@ -41,10 +40,10 @@ public class Usuario {
 	@Column(name = "dt_nascimento")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dataNascimento;
+	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("usuario")
+	@JsonIgnoreProperties({"usuario"})
 	private List<Postagem> postagem;
-
 
 	public Usuario(long id, String nome, String usuario, String senha, LocalDate dataNascimento) {
 		this.id = id;
@@ -53,14 +52,12 @@ public class Usuario {
 		this.senha = senha;
 		this.dataNascimento = dataNascimento;
 	}
-	
-	
+
 	public Usuario(@NotNull String usuario, @NotNull String senha) {
 		this.usuario = usuario;
 		this.senha = senha;
 	}
 
-	
 	public Usuario() {
 	}
 

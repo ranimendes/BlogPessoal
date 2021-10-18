@@ -13,6 +13,7 @@ import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "tb_tema")
+
 public class Tema {
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
